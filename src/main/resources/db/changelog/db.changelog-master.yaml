@@ -1,5 +1,9 @@
 databaseChangeLog:
   - include:
+      file: db/changelog/first.xml
+  - include:
+      file: db/changelog/second.xml
+  - include:
       file: db/changelog/third.xml
   - include:
       file: db/changelog/fourth.xml
