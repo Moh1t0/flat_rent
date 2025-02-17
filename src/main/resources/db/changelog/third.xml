@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+    <changeSet id="202502171912" author="Moh1to">
+        <createTable tableName="client">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" primaryKeyName="client_id_pk"/>
+            </column>
+            <column name="name" type="varchar(50)"/>
+            <column name="email" type="varchar(255)">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
