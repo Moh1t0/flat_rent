@@ -18,7 +18,9 @@
             <column name="house" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="corpus" type="varchar(50)"/>
+            <column name="corpus" type="varchar(50)">
+            <constraints nullable="false"/>
+            </column>
             <column name="room_count" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
