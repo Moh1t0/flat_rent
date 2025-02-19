@@ -61,10 +61,10 @@
             <column name="id" type="serial" >
                 <constraints primaryKey="true" primaryKeyName="booking_id_pk"/>
             </column>
-            <column name= "start_date" type="date">
+            <column name= "start_date" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name= "end_date" type="date">
+            <column name= "end_date" type="timestamp">
                 <constraints nullable="false"/>
             </column>
             <column name="client_id" type="int" >
