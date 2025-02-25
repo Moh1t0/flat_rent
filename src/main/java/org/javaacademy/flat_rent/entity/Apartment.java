@@ -4,15 +4,20 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,10 +26,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Apartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(nullable = false)
@@ -39,4 +46,8 @@ public class Apartment {
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     private ApartmentType type;
+
+    @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER)
+    @ToString.Exclude
+    private List<Advert> adverts;
 }
