@@ -35,32 +35,3 @@ public abstract class BookingMapper {
 
     public abstract BookingDtoResponse toDtoResponse(Booking booking);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

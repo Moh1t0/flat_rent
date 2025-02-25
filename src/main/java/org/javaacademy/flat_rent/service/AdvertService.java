@@ -24,9 +24,3 @@ public class AdvertService {
         return advertMapper.toDtoResponse(advert);
     }
 }
-
-
-
-
-
-
