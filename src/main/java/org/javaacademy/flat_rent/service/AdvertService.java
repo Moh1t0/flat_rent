@@ -18,9 +18,8 @@ public class AdvertService {
     private final ApartmentRepository apartmentRepository;
 
     public AdvertDtoResponse save(AdvertDtoRequest advertDtoRequest) {
-        Apartment apartmentId = apartmentRepository.findById(advertDtoRequest.getApartmentId()).orElseThrow();
-        Advert advert = advertMapper.toEntity(advertDtoRequest, apartmentId);
-        advertRepository.save(advert);
-        return advertMapper.toDtoResponse(advert);
+        Advert entity = advertMapper.toEntityWithRelation(advertDtoRequest);
+        advertRepository.save(entity);
+        return advertMapper.toDtoResponse(entity);
     }
 }
