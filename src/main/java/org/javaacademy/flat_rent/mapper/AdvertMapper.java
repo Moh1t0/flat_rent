@@ -28,24 +28,3 @@ public abstract class AdvertMapper {
 
     public abstract AdvertDtoResponse toDtoResponse(Advert advert);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
