@@ -11,10 +11,15 @@ import org.javaacademy.flat_rent.entity.ApartmentType;
 @Getter
 @Setter
 public class ApartmentDto {
+
     private Integer id;
+
     private String city;
+
     private String street;
+
     private String house;
+
     @JsonProperty("apartment_type")
     private ApartmentType type;
 }

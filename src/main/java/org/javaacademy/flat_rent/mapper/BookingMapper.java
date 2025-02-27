@@ -10,6 +10,7 @@ import org.javaacademy.flat_rent.repository.ClientRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(
@@ -27,10 +28,20 @@ public abstract class BookingMapper {
     @Mapping(target = "advert", source = "advert")
     public abstract Booking toEntity(BookingDtoRequest bookingDtoRequest, Client client, Advert advert);
 
-    public Booking toEntityWithRelation(BookingDtoRequest bookingDtoRequest) {
-        Client client = clientRepository.findById(bookingDtoRequest.getClientId()).orElseThrow();
-        Advert advert = advertRepository.findById(bookingDtoRequest.getAdvertId()).orElseThrow();
-        return toEntity(bookingDtoRequest, client, advert);
+    @Mapping(target = "totalPrice", source = "totalPrice")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "client", source = "clientId", qualifiedByName = "getClientById")
+    @Mapping(target = "advert", source = "advertId", qualifiedByName = "getAdvertById")
+    public abstract Booking toEntityWithRelation(BookingDtoRequest bookingDtoRequest);
+
+    @Named("getClientById")
+    protected Client getClientById(Integer id) {
+        return clientRepository.findById(id).orElseThrow();
+    }
+
+    @Named("getAdvertById")
+    protected Advert getAdvertById(Integer id) {
+        return advertRepository.findById(id).orElseThrow();
     }
 
     public abstract BookingDtoResponse toDtoResponse(Booking booking);

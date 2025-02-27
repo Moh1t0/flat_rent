@@ -14,8 +14,11 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class BookingDtoResponse {
+
     private Integer id;
+
     private ClientDto client;
+
     private AdvertDtoResponse advert;
 
     @JsonProperty("date_start")
