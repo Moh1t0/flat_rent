@@ -22,13 +22,11 @@ public abstract class BookingMapper {
     @Autowired
     private AdvertRepository advertRepository;
 
-    @Mapping(target = "totalPrice", source = "totalPrice")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "client", source = "client")
     @Mapping(target = "advert", source = "advert")
     public abstract Booking toEntity(BookingDtoRequest bookingDtoRequest, Client client, Advert advert);
 
-    @Mapping(target = "totalPrice", source = "totalPrice")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "client", source = "clientId", qualifiedByName = "getClientById")
     @Mapping(target = "advert", source = "advertId", qualifiedByName = "getAdvertById")
