@@ -2,6 +2,7 @@ package org.javaacademy.flat_rent.mapper;
 
 import org.javaacademy.flat_rent.dto.booking.BookingDtoRequest;
 import org.javaacademy.flat_rent.dto.booking.BookingDtoResponse;
+import org.javaacademy.flat_rent.dto.client.ClientDto;
 import org.javaacademy.flat_rent.entity.Advert;
 import org.javaacademy.flat_rent.entity.Booking;
 import org.javaacademy.flat_rent.entity.Client;
@@ -25,17 +26,23 @@ public abstract class BookingMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "client", source = "client")
     @Mapping(target = "advert", source = "advert")
+    @Mapping(target = "totalPrice", ignore = true)
     public abstract Booking toEntity(BookingDtoRequest bookingDtoRequest, Client client, Advert advert);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "client", source = "clientId", qualifiedByName = "getClientById")
+    @Mapping(target = "client", source = "client", qualifiedByName = "getClientById")
     @Mapping(target = "advert", source = "advertId", qualifiedByName = "getAdvertById")
+    @Mapping(target = "totalPrice", ignore = true)
     public abstract Booking toEntityWithRelation(BookingDtoRequest bookingDtoRequest);
 
     @Named("getClientById")
-    protected Client getClientById(Integer id) {
-        return clientRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Client с id: %s не найден".formatted(id)));
+    protected Client getClientById(ClientDto clientDto) {
+        if (clientDto == null || clientDto.getId() == null) {
+            throw new IllegalArgumentException("Client id is null!");
+        }
+        return clientRepository.findById(clientDto.getId())
+                .orElseThrow(
+                        () -> new IllegalArgumentException("Client с id: %s не найден".formatted(clientDto.getId())));
     }
 
     @Named("getAdvertById")
@@ -45,5 +52,6 @@ public abstract class BookingMapper {
         );
     }
 
+    @Mapping(target = "totalPrice", source = "totalPrice")
     public abstract BookingDtoResponse toDtoResponse(Booking booking);
 }

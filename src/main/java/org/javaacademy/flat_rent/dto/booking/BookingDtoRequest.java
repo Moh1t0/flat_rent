@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.javaacademy.flat_rent.dto.client.ClientDto;
 
 import java.time.LocalDate;
 
@@ -13,8 +14,8 @@ import java.time.LocalDate;
 public class BookingDtoRequest {
     private Integer id;
 
-    @JsonProperty("client_id")
-    private Integer clientId;
+    @JsonProperty("client")
+    private ClientDto client;
 
     @JsonProperty("advert_id")
     private Integer advertId;

@@ -17,8 +17,10 @@ public class BookingDtoResponse {
 
     private Integer id;
 
+    @JsonProperty("client")
     private ClientDto client;
 
+    @JsonProperty("advert")
     private AdvertDtoResponse advert;
 
     @JsonProperty("date_start")

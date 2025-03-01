@@ -1,8 +1,8 @@
 package org.javaacademy.flat_rent.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -49,7 +49,7 @@ public class Advert {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "advert", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "advert", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     @ToString.Exclude
     private List<Booking> bookings;
 }
