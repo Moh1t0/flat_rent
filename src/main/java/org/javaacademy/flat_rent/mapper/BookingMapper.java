@@ -34,12 +34,15 @@ public abstract class BookingMapper {
 
     @Named("getClientById")
     protected Client getClientById(Integer id) {
-        return clientRepository.findById(id).orElseThrow();
+        return clientRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Client с id: %s не найден".formatted(id)));
     }
 
     @Named("getAdvertById")
     protected Advert getAdvertById(Integer id) {
-        return advertRepository.findById(id).orElseThrow();
+        return advertRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Advert с id: %s не найдено".formatted(id))
+        );
     }
 
     public abstract BookingDtoResponse toDtoResponse(Booking booking);

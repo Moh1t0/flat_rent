@@ -29,7 +29,8 @@ public abstract class AdvertMapper {
 
     @Named("getApartmentById")
     protected Apartment getApartmentById(Integer id) {
-        return apartmentRepository.findById(id).orElseThrow();
+        return apartmentRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Apartment с id: %s не найдено".formatted(id)));
     }
 
     public abstract AdvertDtoResponse toDtoResponse(Advert advert);
