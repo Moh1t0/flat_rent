@@ -26,16 +26,3 @@ public interface AdvertRepository extends JpaRepository<Advert, Integer> {
                                           @Param("endDate") LocalDateTime endDate);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
