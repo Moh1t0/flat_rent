@@ -15,19 +15,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/booking")
+@Tag(name = "Бронирование", description = "Контроллер для работы с бронированиями")
 public class BookingController {
     private final BookingService bookingService;
     private final ClientService clientService;
 
+    @Operation(summary = "Создание бронирования",
+            description = "Создает новое бронирование для клиента",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Бронирование успешно создано",
+                            content = @Content(schema = @Schema(implementation = BookingDtoResponse.class))),
+                    @ApiResponse(responseCode = "400", description = "Некорректные данные")
+            })
     @PostMapping
     public ResponseEntity<BookingDtoResponse> createBooking(@RequestBody BookingDtoRequest dtoRequest) {
         BookingDtoResponse bookingDtoResponse = bookingService.save(dtoRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(bookingDtoResponse);
     }
 
+    @Operation(summary = "Получение бронирований по email клиента",
+            description = "Возвращает список бронирований для указанного email клиента",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Успешный запрос",
+                            content = @Content(schema = @Schema(implementation = PageDto.class))),
+                    @ApiResponse(responseCode = "404", description = "Клиент не найден")
+            })
     @GetMapping
     public ResponseEntity<PageDto<BookingDtoResponse>> getBookingByClientEmail(
             @RequestParam String email,

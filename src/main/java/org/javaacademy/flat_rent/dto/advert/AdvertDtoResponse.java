@@ -5,21 +5,28 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.javaacademy.flat_rent.dto.aparment.ApartmentDto;
-
 import java.math.BigDecimal;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Builder
 @Getter
 @Setter
+@Schema(description = "DTO для ответа с объявлением")
 public class AdvertDtoResponse {
+
+    @Schema(description = "ID объявления")
     private Integer id;
 
+    @Schema(description = "Цена аренды")
     private BigDecimal price;
 
+    @Schema(description = "Активно ли объявление")
     @JsonProperty("is_active")
     private Boolean isActive;
 
+    @Schema(description = "Квартира")
     private ApartmentDto apartment;
 
+    @Schema(description = "Описание объявления")
     private String description;
 }
