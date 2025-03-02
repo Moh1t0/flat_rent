@@ -49,7 +49,7 @@ public class Advert {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "advert", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "advert", cascade = {CascadeType.MERGE}, orphanRemoval = true)
     @ToString.Exclude
     private List<Booking> bookings;
 }

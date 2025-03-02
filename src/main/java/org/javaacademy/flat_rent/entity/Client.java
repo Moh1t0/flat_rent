@@ -35,10 +35,12 @@ public class Client {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "client", cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Booking> bookings;
+
+    public Client(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 }

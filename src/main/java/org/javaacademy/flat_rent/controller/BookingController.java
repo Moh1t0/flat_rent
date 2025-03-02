@@ -36,5 +36,4 @@ public class BookingController {
         PageDto<BookingDtoResponse> bookingsByClientEmail = bookingService.getBookingsByClientEmail(email, page, size);
         return ResponseEntity.ok(bookingsByClientEmail);
     }
-
 }

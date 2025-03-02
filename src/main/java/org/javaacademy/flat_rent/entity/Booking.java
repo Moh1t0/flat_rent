@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -34,12 +34,12 @@ public class Booking {
     private Integer id;
 
     @Column(nullable = false, name = "start_date")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(nullable = false, name = "end_date")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(nullable = false, name = "client_id")
     private Client client;
 

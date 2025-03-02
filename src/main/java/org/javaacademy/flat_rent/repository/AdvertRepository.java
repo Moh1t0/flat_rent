@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public interface AdvertRepository extends JpaRepository<Advert, Integer> {
@@ -22,7 +22,20 @@ public interface AdvertRepository extends JpaRepository<Advert, Integer> {
             and (b.startDate <= :endDate and b.endDate >= :startDate)
             """)
     boolean existsByAdvertAndDatesOverlap(@Param("advert") Advert advert,
-                                          @Param("startDate") LocalDate startDate,
-                                          @Param("endDate") LocalDate endDate);
+                                          @Param("startDate") LocalDateTime startDate,
+                                          @Param("endDate") LocalDateTime endDate);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

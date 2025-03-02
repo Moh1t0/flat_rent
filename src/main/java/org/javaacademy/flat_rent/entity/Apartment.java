@@ -47,7 +47,7 @@ public class Apartment {
     @Column(nullable = false)
     private ApartmentType type;
 
-    @OneToMany(mappedBy = "apartment", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "apartment", cascade = {CascadeType.MERGE}, orphanRemoval = true)
     @ToString.Exclude
     private List<Advert> adverts;
 }

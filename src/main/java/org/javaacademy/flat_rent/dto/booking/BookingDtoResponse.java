@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.javaacademy.flat_rent.dto.advert.AdvertDtoResponse;
 import org.javaacademy.flat_rent.dto.client.ClientDto;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @Getter
@@ -24,10 +23,10 @@ public class BookingDtoResponse {
     private AdvertDtoResponse advert;
 
     @JsonProperty("date_start")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @JsonProperty("date_finish")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @JsonProperty("result_price")
     private BigDecimal totalPrice;
