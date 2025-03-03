@@ -33,6 +33,7 @@ public class ClientService {
         client = clientRepository.save(client);
         return clientMapper.toDto(client);
     }
+
     @Transactional
     public void deleteClientById(Integer id) {
         Client client = clientRepository.findById(id).orElseThrow(

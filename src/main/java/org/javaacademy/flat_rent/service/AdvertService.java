@@ -27,8 +27,8 @@ public class AdvertService {
         return advertMapper.toDtoResponse(entity);
     }
 
-    public PageDto<AdvertDtoResponse> getAdvertsByCity(String city, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "price"));
+    public PageDto<AdvertDtoResponse> getAdvertsByCity(String city, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "price"));
         Page<Advert> advertPage = advertRepository.findByApartmentCity(city, pageable);
 
         List<AdvertDtoResponse> list = advertPage.getContent().stream()

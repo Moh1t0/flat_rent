@@ -24,5 +24,4 @@ public interface AdvertRepository extends JpaRepository<Advert, Integer> {
     boolean existsByAdvertAndDatesOverlap(@Param("advert") Advert advert,
                                           @Param("startDate") LocalDateTime startDate,
                                           @Param("endDate") LocalDateTime endDate);
-
 }

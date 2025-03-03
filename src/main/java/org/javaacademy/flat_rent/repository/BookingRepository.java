@@ -17,8 +17,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
             """)
     Page<Booking> findClientEmail(@Param("email") String email, Pageable pageable);
 
-
     @Modifying
     @Query("delete from Booking b where b.client = :client")
-    void deleteByClient(@Param("client")Client client);
+    void deleteByClient(@Param("client") Client client);
 }

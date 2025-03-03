@@ -14,6 +14,8 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
+
 @Mapper(
         componentModel = MappingConstants.ComponentModel.SPRING,
         uses = {ClientMapper.class, AdvertMapper.class})
@@ -34,6 +36,14 @@ public abstract class BookingMapper {
     @Mapping(target = "advert", source = "advertId", qualifiedByName = "getAdvertById")
     @Mapping(target = "totalPrice", ignore = true)
     public abstract Booking toEntityWithRelation(BookingDtoRequest bookingDtoRequest);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "client", source = "client")
+    @Mapping(target = "advert", source = "advert")
+    @Mapping(target = "totalPrice", source = "totalPrice")
+    public abstract Booking createBooking(BookingDtoRequest bookingDtoRequest,
+                                          Advert advert, Client client, BigDecimal totalPrice);
+
 
     @Named("getClientById")
     protected Client getClientById(ClientDto clientDto) {

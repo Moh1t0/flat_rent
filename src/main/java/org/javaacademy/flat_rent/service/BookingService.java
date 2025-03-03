@@ -92,26 +92,15 @@ public class BookingService {
         }
     }
 
-
     private Booking createBooking(BookingDtoRequest bookingDtoRequest,
                                   Advert advert, Client client, BigDecimal totalPrice) {
-        Booking booking = new Booking();
-        booking.setStartDate(bookingDtoRequest.getStartDate());
-        booking.setEndDate(bookingDtoRequest.getEndDate());
-        booking.setClient(client);
-        booking.setAdvert(advert);
-        booking.setTotalPrice(totalPrice);
-        return booking;
+        return bookingMapper.createBooking(bookingDtoRequest, advert, client, totalPrice);
     }
 
     private void validateBookingDates(Advert advert, LocalDateTime startDate, LocalDateTime endDate) {
-        if (isBookingOverlapping(advert, startDate, endDate)) {
+        if (advertRepository.existsByAdvertAndDatesOverlap(advert, startDate, endDate)) {
             throw new IllegalArgumentException("Даты бронирования совпадают с существующими бронированиями");
         }
-    }
-
-    private boolean isBookingOverlapping(Advert advert, LocalDateTime startDate, LocalDateTime endDate) {
-        return advertRepository.existsByAdvertAndDatesOverlap(advert, startDate, endDate);
     }
 
     private BigDecimal calculateTotalPrice(BigDecimal pricePerNight, LocalDateTime startDate, LocalDateTime endDate) {
