@@ -35,7 +35,6 @@ public class BookingService {
     private final ClientRepository clientRepository;
     private final AdvertRepository advertRepository;
 
-
     @Transactional
     public BookingDtoResponse save(BookingDtoRequest bookingDtoRequest) {
         try {
@@ -57,7 +56,7 @@ public class BookingService {
 
     public PageDto<BookingDtoResponse> getBookingsByClientEmail(String email, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Booking> bookingPage = bookingRepository.findClientEmail(email, pageable);
+        Page<Booking> bookingPage = bookingRepository.findAllByClientEmail(email, pageable);
 
         List<BookingDtoResponse> bookings = bookingPage.getContent().stream()
                 .map(bookingMapper::toDtoResponse)
@@ -83,13 +82,17 @@ public class BookingService {
         if (clientDto == null) {
             throw new IllegalArgumentException("Client is null!");
         }
+
         if (clientDto.getId() != null) {
             return clientRepository.findById(clientDto.getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Client c таким id не найден!"));
-        } else {
-            return clientRepository.findByEmail(clientDto.getEmail())
-                    .orElseGet(() -> clientRepository.save(new Client(clientDto.getName(), clientDto.getEmail())));
+                    .orElseThrow(
+                            () -> new IllegalArgumentException("Client с id " + clientDto.getId() + " не найден!"));
         }
+
+        Client newClient = new Client();
+        newClient.setName(clientDto.getName());
+        newClient.setEmail(clientDto.getEmail());
+        return clientRepository.save(newClient);
     }
 
     private Booking createBooking(BookingDtoRequest bookingDtoRequest,

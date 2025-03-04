@@ -7,19 +7,19 @@ import org.javaacademy.flat_rent.dto.booking.BookingDtoResponse;
 import org.javaacademy.flat_rent.service.BookingService;
 import org.javaacademy.flat_rent.service.ClientService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -38,9 +38,9 @@ public class BookingController {
                     @ApiResponse(responseCode = "400", description = "Некорректные данные")
             })
     @PostMapping
-    public ResponseEntity<BookingDtoResponse> createBooking(@RequestBody BookingDtoRequest dtoRequest) {
-        BookingDtoResponse bookingDtoResponse = bookingService.save(dtoRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(bookingDtoResponse);
+    @ResponseStatus(HttpStatus.CREATED)
+    public BookingDtoResponse createBooking(@RequestBody BookingDtoRequest dtoRequest) {
+        return bookingService.save(dtoRequest);
     }
 
     @Operation(summary = "Получение бронирований по email клиента",
@@ -51,11 +51,11 @@ public class BookingController {
                     @ApiResponse(responseCode = "404", description = "Клиент не найден")
             })
     @GetMapping
-    public ResponseEntity<PageDto<BookingDtoResponse>> getBookingByClientEmail(
+    public PageDto<BookingDtoResponse> getBookingByClientEmail(
             @RequestParam String email,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
-        PageDto<BookingDtoResponse> bookingsByClientEmail = bookingService.getBookingsByClientEmail(email, page, size);
-        return ResponseEntity.ok(bookingsByClientEmail);
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "20") Integer size) {
+        return bookingService.getBookingsByClientEmail(email, page, size);
+
     }
 }

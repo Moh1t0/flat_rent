@@ -21,16 +21,8 @@ public class ClientService {
 
     @Transactional
     public ClientDto save(ClientDto clientDto) {
-        Client client;
-        if (clientDto.getId() != null) {
-            client = clientRepository.findById(clientDto.getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Client not found"));
-            client.setName(clientDto.getName());
-            client.setEmail(clientDto.getEmail());
-        } else {
-            client = clientMapper.toEntity(clientDto);
-        }
-        client = clientRepository.save(client);
+        Client client = clientMapper.toEntity(clientDto);
+        clientRepository.save(client);
         return clientMapper.toDto(client);
     }
 

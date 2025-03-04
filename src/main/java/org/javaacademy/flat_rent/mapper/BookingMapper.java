@@ -62,6 +62,5 @@ public abstract class BookingMapper {
         );
     }
 
-    @Mapping(target = "totalPrice", source = "totalPrice")
     public abstract BookingDtoResponse toDtoResponse(Booking booking);
 }

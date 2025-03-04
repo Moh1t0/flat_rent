@@ -58,13 +58,13 @@ public class BookingControllerTest {
             2025, 3, 10, 14, 0);
     private static final LocalDateTime NEW_END_DATE = LocalDateTime.of(
             2025, 3, 15, 12, 0);
-    private static final LocalDateTime DATE_4_2_3_START = LocalDateTime.of(
+    private static final LocalDateTime START_DATE_OVERLAP_CASE_1 = LocalDateTime.of(
             2025, 9, 29, 0, 0);
-    private static final LocalDateTime DATE_4_2_3_END = LocalDateTime.of(
+    private static final LocalDateTime END_DATE_OVERLAP_CASE_1 = LocalDateTime.of(
             2025, 10, 2, 0, 0);
-    private static final LocalDateTime DATE_4_2_4_START = LocalDateTime.of(
+    private static final LocalDateTime START_DATE_OVERLAP_CASE_2 = LocalDateTime.of(
             2025, 10, 9, 0, 0);
-    private static final LocalDateTime DATE_4_2_4_END = LocalDateTime.of(
+    private static final LocalDateTime END_DATE_OVERLAP_CASE_2 = LocalDateTime.of(
             2025, 10, 11, 0, 0);
 
     private final RequestSpecification requestSpecification = new RequestSpecBuilder()
@@ -221,8 +221,8 @@ public class BookingControllerTest {
     public void bookingFailsIfDatesOverlapCaseSecondSituation() {
         BookingDtoRequest firstBookingRequest = BookingDtoRequest.builder()
                 .advertId(advertDtoResponse.getId())
-                .startDate(DATE_4_2_3_START)
-                .endDate(DATE_4_2_3_END)
+                .startDate(START_DATE_OVERLAP_CASE_1)
+                .endDate(END_DATE_OVERLAP_CASE_1)
                 .client(ClientDto.builder()
                         .id(savedClient.getId())
                         .name(savedClient.getName())
@@ -244,8 +244,8 @@ public class BookingControllerTest {
 
         BookingDtoRequest overlappingBookingRequest = BookingDtoRequest.builder()
                 .advertId(advertDtoResponse.getId())
-                .startDate(DATE_4_2_3_START)
-                .endDate(DATE_4_2_3_END)
+                .startDate(START_DATE_OVERLAP_CASE_1)
+                .endDate(END_DATE_OVERLAP_CASE_1)
                 .client(ClientDto.builder()
                         .id(savedClient.getId())
                         .name(savedClient.getName())
@@ -265,8 +265,8 @@ public class BookingControllerTest {
     public void bookingFailsIfDatesOverlapCaseThirdSituation() {
         BookingDtoRequest firstBookingRequest = BookingDtoRequest.builder()
                 .advertId(advertDtoResponse.getId())
-                .startDate(DATE_4_2_4_START)
-                .endDate(DATE_4_2_4_END)
+                .startDate(START_DATE_OVERLAP_CASE_2)
+                .endDate(END_DATE_OVERLAP_CASE_2)
                 .client(ClientDto.builder()
                         .id(savedClient.getId())
                         .name(savedClient.getName())
@@ -288,8 +288,8 @@ public class BookingControllerTest {
 
         BookingDtoRequest overlappingBookingRequest = BookingDtoRequest.builder()
                 .advertId(advertDtoResponse.getId())
-                .startDate(DATE_4_2_4_START)
-                .endDate(DATE_4_2_4_END)
+                .startDate(START_DATE_OVERLAP_CASE_2)
+                .endDate(END_DATE_OVERLAP_CASE_2)
                 .client(ClientDto.builder()
                         .id(savedClient.getId())
                         .name(savedClient.getName())

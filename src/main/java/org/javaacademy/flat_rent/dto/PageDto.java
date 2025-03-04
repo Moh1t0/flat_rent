@@ -21,7 +21,7 @@ public class PageDto<T> {
     private int page;
 
     @Schema(description = "Размер страницы")
-    private int size;
+    private Integer size;
 
     @Schema(description = "Общее количество элементов")
     private long totalElements;
