@@ -11,6 +11,7 @@ import org.javaacademy.flat_rent.entity.Advert;
 import org.javaacademy.flat_rent.entity.Booking;
 import org.javaacademy.flat_rent.entity.Client;
 import org.javaacademy.flat_rent.mapper.BookingMapper;
+import org.javaacademy.flat_rent.mapper.ClientMapper;
 import org.javaacademy.flat_rent.repository.AdvertRepository;
 import org.javaacademy.flat_rent.repository.BookingRepository;
 import org.javaacademy.flat_rent.repository.ClientRepository;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class BookingService {
     private final BookingRepository bookingRepository;
     private final ClientRepository clientRepository;
     private final AdvertRepository advertRepository;
+    private final ClientMapper clientMapper;
 
     @Transactional
     public BookingDtoResponse save(BookingDtoRequest bookingDtoRequest) {
@@ -89,9 +91,7 @@ public class BookingService {
                             () -> new IllegalArgumentException("Client с id " + clientDto.getId() + " не найден!"));
         }
 
-        Client newClient = new Client();
-        newClient.setName(clientDto.getName());
-        newClient.setEmail(clientDto.getEmail());
+        Client newClient = clientMapper.toEntity(clientDto);
         return clientRepository.save(newClient);
     }
 
@@ -100,13 +100,13 @@ public class BookingService {
         return bookingMapper.createBooking(bookingDtoRequest, advert, client, totalPrice);
     }
 
-    private void validateBookingDates(Advert advert, LocalDateTime startDate, LocalDateTime endDate) {
+    private void validateBookingDates(Advert advert, LocalDate startDate, LocalDate endDate) {
         if (advertRepository.existsByAdvertAndDatesOverlap(advert, startDate, endDate)) {
             throw new IllegalArgumentException("Даты бронирования совпадают с существующими бронированиями");
         }
     }
 
-    private BigDecimal calculateTotalPrice(BigDecimal pricePerNight, LocalDateTime startDate, LocalDateTime endDate) {
+    private BigDecimal calculateTotalPrice(BigDecimal pricePerNight, LocalDate startDate, LocalDate endDate) {
         long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
         return pricePerNight.multiply(BigDecimal.valueOf(daysBetween));
     }

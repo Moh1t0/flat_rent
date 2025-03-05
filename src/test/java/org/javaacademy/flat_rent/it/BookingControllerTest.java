@@ -27,7 +27,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.jdbc.Sql;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static io.restassured.RestAssured.given;
@@ -50,23 +50,22 @@ public class BookingControllerTest {
     private static final ApartmentType APARTMENT_TYPE = ApartmentType.ONE_ROOM;
     private static final BigDecimal PRICE = BigDecimal.TEN;
     private static final String DESCRIPTION = "test advert";
-    private static final LocalDateTime START_DATE = LocalDateTime.of(
-            2025, 3, 5, 0, 0);
-    private static final LocalDateTime END_DATE = LocalDateTime.of(
-            2025, 3, 6, 0, 0);
-    private static final LocalDateTime NEW_START_DATE = LocalDateTime.of(
-            2025, 3, 10, 14, 0);
-    private static final LocalDateTime NEW_END_DATE = LocalDateTime.of(
-            2025, 3, 15, 12, 0);
-    private static final LocalDateTime START_DATE_OVERLAP_CASE_1 = LocalDateTime.of(
-            2025, 9, 29, 0, 0);
-    private static final LocalDateTime END_DATE_OVERLAP_CASE_1 = LocalDateTime.of(
-            2025, 10, 2, 0, 0);
-    private static final LocalDateTime START_DATE_OVERLAP_CASE_2 = LocalDateTime.of(
-            2025, 10, 9, 0, 0);
-    private static final LocalDateTime END_DATE_OVERLAP_CASE_2 = LocalDateTime.of(
-            2025, 10, 11, 0, 0);
-
+    private static final LocalDate START_DATE = LocalDate.of(
+            2025, 3, 5);
+    private static final LocalDate END_DATE = LocalDate.of(
+            2025, 3, 6);
+    private static final LocalDate NEW_START_DATE = LocalDate.of(
+            2025, 3, 10);
+    private static final LocalDate NEW_END_DATE = LocalDate.of(
+            2025, 3, 15);
+    private static final LocalDate START_DATE_OVERLAP_CASE_1 = LocalDate.of(
+            2025, 9, 29);
+    private static final LocalDate END_DATE_OVERLAP_CASE_1 = LocalDate.of(
+            2025, 10, 2);
+    private static final LocalDate START_DATE_OVERLAP_CASE_2 = LocalDate.of(
+            2025, 10, 9);
+    private static final LocalDate END_DATE_OVERLAP_CASE_2 = LocalDate.of(
+            2025, 10, 11);
     private final RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setBasePath("/booking")
             .setContentType(ContentType.JSON)

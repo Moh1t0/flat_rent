@@ -39,8 +39,6 @@ public abstract class BookingMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "client", source = "client")
-    @Mapping(target = "advert", source = "advert")
-    @Mapping(target = "totalPrice", source = "totalPrice")
     public abstract Booking createBooking(BookingDtoRequest bookingDtoRequest,
                                           Advert advert, Client client, BigDecimal totalPrice);
 

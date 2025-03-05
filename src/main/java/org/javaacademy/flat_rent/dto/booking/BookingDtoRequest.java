@@ -1,11 +1,14 @@
 package org.javaacademy.flat_rent.dto.booking;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.javaacademy.flat_rent.dto.client.ClientDto;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Builder
@@ -26,10 +29,12 @@ public class BookingDtoRequest {
     private Integer advertId;
 
     @Schema(description = "Дата начала бронирования")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("date_start")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Schema(description = "Дата окончания бронирования")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("date_finish")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 }

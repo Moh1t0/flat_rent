@@ -8,8 +8,7 @@ import org.javaacademy.flat_rent.dto.advert.AdvertDtoResponse;
 import org.javaacademy.flat_rent.dto.client.ClientDto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
@@ -32,11 +31,11 @@ public class BookingDtoResponse {
 
     @Schema(description = "Дата начала бронирования")
     @JsonProperty("date_start")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Schema(description = "Дата окончания бронирования")
     @JsonProperty("date_finish")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @Schema(description = "Итоговая цена")
     @JsonProperty("result_price")

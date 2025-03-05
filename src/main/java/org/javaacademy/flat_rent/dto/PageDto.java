@@ -18,10 +18,10 @@ public class PageDto<T> {
     private List<T> content;
 
     @Schema(description = "Номер страницы")
-    private int page;
+    private int pageNumber;
 
     @Schema(description = "Размер страницы")
-    private Integer size;
+    private Integer pageSize;
 
     @Schema(description = "Общее количество элементов")
     private long totalElements;

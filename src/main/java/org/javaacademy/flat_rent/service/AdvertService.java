@@ -20,7 +20,7 @@ import java.util.List;
 public class AdvertService {
     private final AdvertRepository advertRepository;
     private final AdvertMapper advertMapper;
-    private static final String SORTED_PRICE = "price";
+    private static final String PRICE_COLUMN = "price";
 
     public AdvertDtoResponse save(AdvertDtoRequest advertDtoRequest) {
         Advert entity = advertMapper.toEntityWithRelation(advertDtoRequest);
@@ -29,7 +29,7 @@ public class AdvertService {
     }
 
     public PageDto<AdvertDtoResponse> getAdvertsByCity(String city, int pageNumber, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, SORTED_PRICE));
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, PRICE_COLUMN));
         Page<Advert> advertPage = advertRepository.findByApartmentCity(city, pageable);
 
         List<AdvertDtoResponse> list = advertPage.getContent().stream()

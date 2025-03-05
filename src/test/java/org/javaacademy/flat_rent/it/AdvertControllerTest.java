@@ -137,8 +137,8 @@ public class AdvertControllerTest {
 
         assertNotNull(response);
         assertFalse(response.getContent().isEmpty());
-        assertEquals(PAGE_NUMBER, response.getPage());
-        assertEquals(PAGE_SIZE, response.getSize());
+        assertEquals(PAGE_NUMBER, response.getPageNumber());
+        assertEquals(PAGE_SIZE, response.getPageSize());
         assertEquals(EXPECTED_ADVERT_COUNT, response.getContent().size());
     }
 }

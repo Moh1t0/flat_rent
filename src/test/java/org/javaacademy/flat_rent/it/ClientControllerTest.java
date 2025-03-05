@@ -24,7 +24,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -154,8 +154,8 @@ public class ClientControllerTest {
 
         Booking booking = Booking.builder()
                 .client(managedClient)
-                .startDate(LocalDateTime.now())
-                .endDate(LocalDateTime.now().plusDays(2))
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now().plusDays(2))
                 .totalPrice(TOTAL_PRICE)
                 .advert(advert)
                 .build();
